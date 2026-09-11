@@ -101,6 +101,8 @@ graph TD
 | **Core** | Transforms messages into reactive object model | Reactive models (`SurfaceModel`, `ComponentModel`, `DataModel`) |
 | **Framework Adapter** | Paints object model to physical pixels | Native widgets (Flutter, SwiftUI, React) or Craft DOM/canvas |
 
+Alongside this runtime pipeline, **A2UI Composer** serves as the developer environment for authoring, previewing, and testing cross-platform Craft templates before deployment.
+
 ---
 
 ## 1. Express
@@ -313,3 +315,34 @@ Framework bindings and Craft templates are complementary and coexist within the 
 * Standard system controls and complex inputs can be implemented through native Framework Bindings.
 * Domain-specific views, brand cards, and dynamically distributed components can be authored as Craft templates.
 * A2UI Core remains unaware of how a component is rendered; it resolves properties and passes them to whichever adapter implements the catalog entry.
+
+---
+
+## Tooling: A2UI Composer
+
+A2UI Composer is a developer tool for authoring, previewing, and testing cross-platform Craft templates.
+
+```mermaid
+graph LR
+    Author["Template Author / Developer"] --> Composer["A2UI Composer<br/>(Visual editor & test harness)"]
+    Composer --> LivePreview["Cross-Platform Live Preview"]
+
+    subgraph LivePreview["Cross-Platform Live Preview"]
+        R_Flutter["Flutter Engine"]
+        R_Jaspr["Web DOM Engine (Jaspr)"]
+    end
+
+    Composer --> Bundle["Vetted Catalog Bundle<br/>(Templates + Primitives)"]
+    Bundle --> CDN["CDN / App Asset Bundle"]
+    CDN --> Client["Client Framework Adapter"]
+```
+
+### Role and capabilities
+
+In the target architecture, A2UI Composer focuses on the authoring and testing lifecycle of Craft templates:
+
+* **Interactive template authoring**: Developers compose declarative Craft templates using the core primitive set (`Row`, `Column`, `Box`, `Text`, `Button`, `Image`).
+* **Cross-platform verification**: Previews the template side by side across multiple rendering engines (such as Flutter and Jaspr for web DOM) to verify geometric parity and visual consistency across platforms.
+* **State and mock data simulation**: Binds sample data models to test data paths, nested list iteration, and input behaviors without requiring an active agent backend.
+* **Event and interaction debugging**: Simulates user interactions and logs emitted action events to confirm that action handlers and scoped arguments trigger as expected.
+* **Catalog bundling**: Packages vetted templates into ephemerally loadable project bundles ready for CDN deployment or direct host integration.
