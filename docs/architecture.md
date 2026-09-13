@@ -42,17 +42,17 @@ Physical locations (client devices versus remote servers) can be arranged in sev
 graph TD
     subgraph ServerToClient["1. Remote agent with client renderer (most common)"]
         direction LR
-        S1["Server<br/>(Agent: LLM + Express + Macros)"] -->|Network: SSE / WebSocket / MCP<br/>(Transport messages)| C1["Client Device<br/>(Core + Framework Adapter / Craft)"]
+        S1["Server<br/>(Agent: LLM + Express + Macros)"] -->|"Network: SSE / WebSocket / MCP<br/>(Transport messages)"| C1["Client Device<br/>(Core + Framework Adapter / Craft)"]
     end
 
     subgraph OnDevice["2. On-device generative UI"]
         direction LR
-        A2["On-Device LLM + Express + Macros"] -->|In-memory queue / IPC<br/>(Transport messages)| R2["Client UI Layer<br/>(Core + Framework Adapter / Craft)"]
+        A2["On-Device LLM + Express + Macros"] -->|"In-memory queue / IPC<br/>(Transport messages)"| R2["Client UI Layer<br/>(Core + Framework Adapter / Craft)"]
     end
 
     subgraph ServerSide["3. Server-side rendering"]
         direction LR
-        A3["Server Agent<br/>(LLM + Express + Macros)"] -->|Internal pipeline<br/>(Transport messages)| R3["Server UI Framework<br/>(Core + Server Adapter, e.g. Django/Node)"]
+        A3["Server Agent<br/>(LLM + Express + Macros)"] -->|"Internal pipeline<br/>(Transport messages)"| R3["Server UI Framework<br/>(Core + Server Adapter, e.g. Django/Node)"]
     end
 ```
 
